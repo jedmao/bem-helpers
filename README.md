@@ -65,23 +65,23 @@ values into a simple string array.
 
 ```ts
 resolveBEMModifiers([
-	'foo', [
-		{
-			bar: true,
-			baz: null,
-		},
-	],
-	'qux',
-	[
-		[
-			[
-				{
-					corge: undefined,
-					garpley: -1,
-				},
-			],
-		],
-	],
+  'foo', [
+    {
+      bar: true,
+      baz: null,
+    },
+  ],
+  'qux',
+  [
+    [
+      [
+        {
+          corge: undefined,
+          garpley: -1,
+        },
+      ],
+    ],
+  ],
 ]);
 // ["foo", "bar", "qux", "garpley"]
 ```
@@ -90,16 +90,16 @@ resolveBEMModifiers([
 
 ```ts
 toBEMClassNames(
-	'foo',
-	[
-		'bar',
-		[
-			{
-				baz: true,
-			},
-		],
-	],
-	'qux',
+  'foo',
+  [
+    'bar',
+    [
+      {
+        baz: true,
+      },
+    ],
+  ],
+  'qux',
 );
 // "foo foo--bar foo--baz qux"
 ```
