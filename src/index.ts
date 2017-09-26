@@ -75,34 +75,34 @@ export function toBEMClassNames(
 	).join(' '))
 }
 
-function compact<T>(arr: T[]) {
+export function compact<T>(arr: T[]) {
 	return isArray(arr) ? arr.filter(identity) : []
 }
 
-function flatten<T>(arr: T[]) {
+export function flatten<T>(arr: T[]) {
 	// tslint:disable-next-line:no-any
 	return (arr || []).reduce((a, b) => a.concat(b as any), [])
 }
 
-function identity<T>(value: T) {
+export function identity<T>(value: T) {
 	return value
 }
 
 // tslint:disable-next-line:no-any
-function isArray(x: any): x is any[] {
+export function isArray(x: any): x is any[] {
 	return Array.isArray(x)
 }
 
 // tslint:disable-next-line:no-any
-function isString(x: any): x is string {
+export function isString(x: any): x is string {
 	return typeof x === 'string'
 }
 
-function keys<T>(obj: T) {
+export function keys<T>(obj: T) {
 	return Object.keys(obj || {})
 }
 
-function pickBy<T>(obj: T) {
+export function pickBy<T>(obj: T) {
 	const result = {}
 	keys(obj).filter(key => !!obj[key]).forEach(key => {
 		result[key] = obj[key]
@@ -110,7 +110,7 @@ function pickBy<T>(obj: T) {
 	return result
 }
 
-function uniq<T>(arr: T[]) {
+export function uniq<T>(arr: T[]) {
 	return arr.filter(
 		// tslint:disable-next-line:no-any
 		function(this: any, a: T) {
