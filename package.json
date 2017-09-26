@@ -1,0 +1,40 @@
+{
+  "name": "bem-helpers",
+  "version": "0.1.0",
+  "description": "BEM helper functions for resolving and joining block to elements and modifiers.",
+  "keywords": [
+    "bem",
+    "helpers",
+    "css"
+  ],
+  "author": "Jed Mao <jedmao@outlook.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "ava": {
+    "files": [
+      "dist/**/*.test.js"
+    ],
+    "source": [
+      "dist/**/*.js"
+    ]
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "lint": "tslint src/**/*.ts",
+    "prepublish": "npm run lint && tsc && ava",
+    "test": "ava",
+    "watch": "ava --watch"
+  },
+  "dependencies": {
+    "@types/classnames": "^2.2.3",
+    "@types/node": "^8.0.28",
+    "classnames": "^2.2.5"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2"
+  }
+}
