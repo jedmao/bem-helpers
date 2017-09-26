@@ -3,7 +3,6 @@
 [![NPM version](http://img.shields.io/npm/v/bem-helpers.svg?style=flat)](https://www.npmjs.org/package/bem-helpers)
 [![npm license](http://img.shields.io/npm/l/bem-helpers.svg?style=flat-square)](https://www.npmjs.org/package/bem-helpers)
 [![Travis Build Status](https://img.shields.io/travis/jedmao/bem-helpers.svg)](https://travis-ci.org/jedmao/bem-helpers)
-[![codecov](https://codecov.io/gh/jedmao/bem-helpers/branch/master/graph/badge.svg)](https://codecov.io/gh/jedmao/bem-helpers)
 [![Dependency Status](https://gemnasium.com/badges/github.com/jedmao/bem-helpers.svg)](https://gemnasium.com/github.com/jedmao/bem-helpers)
 
 [![npm](https://nodei.co/npm/bem-helpers.svg?downloads=true)](https://nodei.co/npm/bem-helpers/)
