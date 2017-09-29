@@ -1,4 +1,5 @@
 import * as classNames from 'classnames'
+import truthyKeys from 'truthy-keys'
 
 import { BEMModifiers } from './types'
 
@@ -50,7 +51,7 @@ export function resolveBEMModifiers(modifiers?: BEMModifiers): string[] {
 		? flatten(modifiers.map(m => resolveBEMModifiers(m)))
 		: isString(modifiers)
 			? modifiers.split(/\s+/)
-			: keys(pickBy(modifiers)),
+			: truthyKeys(modifiers as {}),
 	))
 }
 
@@ -98,13 +99,9 @@ export function isString(x: any): x is string {
 	return typeof x === 'string'
 }
 
-export function keys<T>(obj: T) {
-	return Object.keys(obj || {})
-}
-
 export function pickBy<T>(obj: T) {
 	const result = {}
-	keys(obj).filter(key => !!obj[key]).forEach(key => {
+	truthyKeys(obj).forEach(key => {
 		result[key] = obj[key]
 	})
 	return result

@@ -1,6 +1,6 @@
 {
   "name": "bem-helpers",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "BEM helper functions for resolving and joining block to elements and modifiers.",
   "keywords": [
     "bem",
@@ -30,7 +30,8 @@
   "dependencies": {
     "@types/classnames": "^2.2.3",
     "@types/node": "^8.0.28",
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "truthy-keys": "^0.1.2"
   },
   "devDependencies": {
     "ava": "^0.22.0",
