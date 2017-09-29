@@ -1,6 +1,6 @@
 {
   "name": "bem-helpers",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "BEM helper functions for resolving and joining block to elements and modifiers.",
   "keywords": [
     "bem",
@@ -9,6 +9,10 @@
   ],
   "author": "Jed Mao <jedmao@outlook.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jedmao/bem-helpers.git"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "ava": {
