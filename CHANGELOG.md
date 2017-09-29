@@ -1,3 +1,6 @@
+## v0.6.0
+- Export `BEMModifiers`, `BEMModifier` and `BEMModifiersHash` types.
+
 ## v0.5.0
 - Restore `resolveBEMModifiers` function as alias to `truthyStringsKeys`.
 - Restore other previously-exported functions (`compact`, `flatten`, `identity`, `isArray`, `isString`, `uniq`).

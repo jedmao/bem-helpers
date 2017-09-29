@@ -1,8 +1,14 @@
 import * as classNames from 'classnames'
 import truthyKeys from 'truthy-keys'
-import truthyStringsKeys, { compact } from 'truthy-strings-keys'
+import truthyStringsKeys, {
+	compact,
+	Primitives,
+} from 'truthy-strings-keys'
 
-import { BEMModifiers } from './types'
+/**
+ * BEM modifiers for blocks and elements (supports nested structures).
+ */
+export type BEMModifiers = Primitives
 
 /**
  * Joins a BEM block with an element.
@@ -81,16 +87,12 @@ export function pickBy<T>(obj: T) {
 }
 
 export {
-	BEMModifier,
-	BEMModifiers,
-	BEMModifiersHash,
-} from './types'
-
-export {
 	compact,
 	flatten,
 	identity,
 	isArray,
 	isString,
+	Primitive as BEMModifier,
+	PrimitiveHash as BEMModifiersHash,
 	uniq,
 } from 'truthy-strings-keys'
