@@ -1,5 +1,6 @@
 import * as classNames from 'classnames'
 import truthyKeys from 'truthy-keys'
+import truthyStringsKeys, { compact } from 'truthy-strings-keys'
 
 import { BEMModifiers } from './types'
 
@@ -42,20 +43,6 @@ export function joinBEMModifiers(
 }
 
 /**
- * Resolves a simple string or a potentially deeply nested structure of
- * modifier values into a simple string array.
- * @return Returns a simple string array of modifiers that passed resolution.
- */
-export function resolveBEMModifiers(modifiers?: BEMModifiers): string[] {
-	return uniq(compact(isArray(modifiers)
-		? flatten(modifiers.map(m => resolveBEMModifiers(m)))
-		: isString(modifiers)
-			? modifiers.split(/\s+/)
-			: truthyKeys(modifiers as {}),
-	))
-}
-
-/**
  * Joins a BEM block or element with any number of modifiers. Preserves
  * existing className, if provided.
  * @param blockOrElement BEM block or element name.
@@ -69,34 +56,11 @@ export function toBEMClassNames(
 ) {
 	const joined = joinBEMModifiers(
 		blockOrElement,
-		resolveBEMModifiers(modifiers),
+		truthyStringsKeys(modifiers),
 	)
 	return classNames(compact(
 		joined.concat(className.split(/\s+/)),
 	).join(' '))
-}
-
-export function compact<T>(arr: T[]) {
-	return isArray(arr) ? arr.filter(identity) : []
-}
-
-export function flatten<T>(arr: T[]) {
-	// tslint:disable-next-line:no-any
-	return (arr || []).reduce((a, b) => a.concat(b as any), [])
-}
-
-export function identity<T>(value: T) {
-	return value
-}
-
-// tslint:disable-next-line:no-any
-export function isArray(x: any): x is any[] {
-	return Array.isArray(x)
-}
-
-// tslint:disable-next-line:no-any
-export function isString(x: any): x is string {
-	return typeof x === 'string'
 }
 
 export function pickBy<T>(obj: T) {
@@ -105,16 +69,6 @@ export function pickBy<T>(obj: T) {
 		result[key] = obj[key]
 	})
 	return result
-}
-
-export function uniq<T>(arr: T[]) {
-	return arr.filter(
-		// tslint:disable-next-line:no-any
-		function(this: any, a: T) {
-			return !this[a] ? this[a] = true : false
-		},
-		{},
-	)
 }
 
 export {
