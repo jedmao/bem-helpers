@@ -21,8 +21,8 @@ values determine whether the modifier name is activated or not.
 
 Why would you want to do this? You might want to build tools to translate
 custom HTML BEM properties into actual class names. These helpers make no
-assumptions about what frameworks you might be using and has only one hard
-dependency on [`classnames`](https://www.npmjs.com/package/classnames). This
+assumptions about what frameworks you might be using and has only a couple of
+hard dependencies that are pretty light-weight. This
 means it shouldn't kill your footprint.
 
 ## Installation
