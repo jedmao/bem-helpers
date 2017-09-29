@@ -1,3 +1,7 @@
+## v0.5.0
+- Restore `resolveBEMModifiers` function as alias to `truthyStringsKeys`.
+- Restore other previously-exported functions (`compact`, `flatten`, `identity`, `isArray`, `isString`, `uniq`).
+
 ## v0.4.0
 - Defer `resolveBEMModifiers` to `truthyStringsKeys`.
 - **Breaking change:** Remove exported `resolveBEMModifiers` function.

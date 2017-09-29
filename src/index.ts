@@ -43,6 +43,15 @@ export function joinBEMModifiers(
 }
 
 /**
+ * Resolves a simple string or a potentially deeply nested structure of
+ * modifier values into a simple string array.
+ * @return Returns a simple string array of modifiers that passed resolution.
+ */
+export function resolveBEMModifiers(modifiers?: BEMModifiers): string[] {
+	return truthyStringsKeys(modifiers)
+}
+
+/**
  * Joins a BEM block or element with any number of modifiers. Preserves
  * existing className, if provided.
  * @param blockOrElement BEM block or element name.
@@ -56,7 +65,7 @@ export function toBEMClassNames(
 ) {
 	const joined = joinBEMModifiers(
 		blockOrElement,
-		truthyStringsKeys(modifiers),
+		resolveBEMModifiers(modifiers),
 	)
 	return classNames(compact(
 		joined.concat(className.split(/\s+/)),
@@ -76,3 +85,12 @@ export {
 	BEMModifiers,
 	BEMModifiersHash,
 } from './types'
+
+export {
+	compact,
+	flatten,
+	identity,
+	isArray,
+	isString,
+	uniq,
+} from 'truthy-strings-keys'
