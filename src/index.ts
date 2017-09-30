@@ -1,5 +1,3 @@
-import * as classNames from 'classnames'
-import truthyKeys from 'truthy-keys'
 import truthyStringsKeys, {
 	compact,
 	Primitives,
@@ -49,9 +47,10 @@ export function joinBEMModifiers(
 }
 
 /**
- * Resolves a simple string or a potentially deeply nested structure of
- * modifier values into a simple string array.
- * @return Returns a simple string array of modifiers that passed resolution.
+ * Alias of truthyStringsKeys. Resolves a simple string or a potentially deeply
+ * nested structure of modifier values into a simple string array.
+ * @return Returns a newly-created, flat string array of modifiers that
+ * passed resolution.
  */
 export function resolveBEMModifiers(modifiers?: BEMModifiers): string[] {
 	return truthyStringsKeys(modifiers)
@@ -73,17 +72,9 @@ export function toBEMClassNames(
 		blockOrElement,
 		resolveBEMModifiers(modifiers),
 	)
-	return classNames(compact(
+	return compact(
 		joined.concat(className.split(/\s+/)),
-	).join(' '))
-}
-
-export function pickBy<T>(obj: T) {
-	const result = {}
-	truthyKeys(obj).forEach(key => {
-		result[key] = obj[key]
-	})
-	return result
+	).join(' ')
 }
 
 export {

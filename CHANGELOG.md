@@ -1,3 +1,6 @@
+## v0.6.2
+- Remove dependency on [`classnames`](https://www.npmjs.com/package/classnames) and [`truthy-keys`](https://www.npmjs.com/package/truthy-keys).
+
 ## v0.6.0
 - Export `BEMModifiers`, `BEMModifier` and `BEMModifiersHash` types.
 
