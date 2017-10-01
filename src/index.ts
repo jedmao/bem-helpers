@@ -1,7 +1,4 @@
-import truthyStringsKeys, {
-	compact,
-	Primitives,
-} from 'truthy-strings-keys'
+import truthyStringsKeys, { Primitives } from 'truthy-strings-keys'
 
 /**
  * BEM modifiers for blocks and elements (supports nested structures).
@@ -52,29 +49,37 @@ export function joinBEMModifiers(
  * @return Returns a newly-created, flat string array of modifiers that
  * passed resolution.
  */
-export function resolveBEMModifiers(modifiers?: BEMModifiers): string[] {
-	return truthyStringsKeys(modifiers)
+export function resolveBEMModifiers(
+	modifiers?: BEMModifiers,
+	options: {
+		unique: boolean
+	} = {
+		unique: false,
+	}): string[] {
+	return truthyStringsKeys(modifiers, options)
 }
 
 /**
- * Joins a BEM block or element with any number of modifiers. Preserves
- * existing className, if provided.
+ * Joins a BEM block or element with any number of modifiers.
  * @param blockOrElement BEM block or element name.
  * @param modifiers BEM modifiers (nested structure supported).
- * @param className Existing class name.
  */
-export function toBEMClassNames(
+export function deepJoinBEMModifiers(
 	blockOrElement: string,
 	modifiers?: BEMModifiers,
-	className: string = '',
+	options: {
+		/**
+		 * Removes duplicates.
+		 */
+		unique: boolean
+	} = {
+		unique: false,
+	},
 ) {
-	const joined = joinBEMModifiers(
+	return joinBEMModifiers(
 		blockOrElement,
-		resolveBEMModifiers(modifiers),
+		resolveBEMModifiers(modifiers, options),
 	)
-	return compact(
-		joined.concat(className.split(/\s+/)),
-	).join(' ')
 }
 
 export {

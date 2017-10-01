@@ -33,7 +33,7 @@ $ npm install bem-helpers
 
 ## Usage
 
-### `joinBEMElement`
+### `joinBEMElement( block, element [, separator] )`
 
 Joins a BEM block to an element.
 
@@ -45,7 +45,7 @@ joinBEMElement('foo', 'bar', '__custom__');
 // "foo__custom__bar"
 ```
 
-### `joinBEMModifiers`
+### `joinBEMModifiers( blockOrElement, modifiers [, separator] )`
 
 Joins a BEM block or element to any number of modifiers.
 
@@ -57,7 +57,7 @@ joinBEMModifiers('foo', ['bar'], '--custom--');
 // foo foo--custom--bar
 ```
 
-### `resolveBEMModifiers`
+### `resolveBEMModifiers( modifiers )`
 
 Resolves a simple string or a potentially deeply nested structure of modifier
 values into a simple string array.
@@ -85,22 +85,24 @@ resolveBEMModifiers([
 // ["foo", "bar", "qux", "garpley"]
 ```
 
-### `toBEMClassNames`
+### `deepJoinBEMModifiers( blockOrElement [, modifiers] [, options] )`
 
 ```ts
-toBEMClassNames(
-  'foo',
+const modifiers = [
+  'bar',
   [
-    'bar',
-    [
-      {
-        baz: true,
-      },
-    ],
+    {
+      bar: true,
+      baz: true,
+    },
   ],
-  'qux',
-);
-// "foo foo--bar foo--baz qux"
+];
+
+deepJoinBEMModifiers('foo', modifiers);
+// ["foo, "foo--bar", "foo--bar", "foo--baz"]
+
+deepJoinBEMModifiers('foo', modifiers, { unique: true });
+// ["foo", "foo--bar", "foo--baz"]
 ```
 
 See [the tests](https://github.com/jedmao/bem-helpers/blob/master/src/index.test.ts)
