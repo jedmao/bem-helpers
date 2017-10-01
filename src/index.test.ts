@@ -3,7 +3,7 @@ import test from 'ava'
 import {
 	joinBEMElement,
 	joinBEMModifiers,
-	toBEMClassNames,
+	deepJoinBEMModifiers,
 } from './'
 
 test('joinBEMElement throws if no block is provided', t => {
@@ -61,30 +61,23 @@ test('joinBEMModifiers joins two modifiers to the same block or element', t => {
 	)
 })
 
-test('toBEMClassNames returns block (first arg) when only block is provided', t => {
-	t.is(
-		toBEMClassNames('foo'),
-		'foo',
+test('deepJoinBEMModifiers returns block (first arg) when only block is provided', t => {
+	t.deepEqual(
+		deepJoinBEMModifiers('foo'),
+		['foo'],
 	)
 })
 
-test('toBEMClassNames returns joined BEM class names', t => {
-	t.is(
-		toBEMClassNames('foo', ['bar']),
-		'foo foo--bar',
+test('deepJoinBEMModifiers returns joined BEM class names', t => {
+	t.deepEqual(
+		deepJoinBEMModifiers('foo', ['bar']),
+		['foo', 'foo--bar'],
 	)
 })
 
-test('toBEMClassNames returns joined BEM class names combined with existing class names', t => {
-	t.is(
-		toBEMClassNames('foo', ['bar'], 'baz'),
-		'foo foo--bar baz',
-	)
-})
-
-test('toBEMClassNames resolves nested modifiers structure', t => {
-	t.is(
-		toBEMClassNames(
+test('deepJoinBEMModifiers resolves nested modifiers structure', t => {
+	t.deepEqual(
+		deepJoinBEMModifiers(
 			'foo',
 			[
 				'bar',
@@ -94,8 +87,26 @@ test('toBEMClassNames resolves nested modifiers structure', t => {
 					},
 				],
 			],
-			'qux',
 		),
-		'foo foo--bar foo--baz qux',
+		['foo', 'foo--bar', 'foo--baz'],
+	)
+})
+
+test('deepJoinBEMModifiers removes duplicates when { unique: true }', t => {
+	const modifiers = [
+		'bar',
+		[
+			{
+				bar: true,
+			},
+		],
+	]
+	t.deepEqual(
+		deepJoinBEMModifiers('foo', modifiers),
+		['foo', 'foo--bar', 'foo--bar'],
+	)
+	t.deepEqual(
+		deepJoinBEMModifiers('foo', modifiers, { unique: true }),
+		['foo', 'foo--bar'],
 	)
 })

@@ -1,3 +1,6 @@
+## v0.7.0
+- **Breaking change:** Rename `toBEMClassNames` to `deepJoinBEMModifiers` and have it return an array instead of a string. Follow with `.join(' ')` to preserve previous functionality.
+
 ## v0.6.2
 - Remove dependency on [`classnames`](https://www.npmjs.com/package/classnames) and [`truthy-keys`](https://www.npmjs.com/package/truthy-keys).
 
