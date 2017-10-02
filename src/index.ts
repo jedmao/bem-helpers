@@ -63,10 +63,8 @@ export function joinBEMModifiers(
 }
 
 /**
- * Alias of truthyStringsKeys. Resolves a simple string or a potentially deeply
- * nested structure of modifier values into a simple string array.
- * @return Returns a newly-created, flat string array of modifiers that
- * passed resolution.
+ * Creates a flat string array from a potentially deeply nested structure of
+ * modifiers.
  */
 export function resolveBEMModifiers(
 	/**

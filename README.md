@@ -7,7 +7,8 @@
 
 [![npm](https://nodei.co/npm/bem-helpers.svg?downloads=true)](https://nodei.co/npm/bem-helpers/)
 
-BEM helper functions for resolving and joining blocks to elements and modifiers.
+BEM helper functions for resolving and joining blocks to elements,
+blocks to modifiers and elements to modifiers.
 
 ## Introduction
 
@@ -59,8 +60,8 @@ joinBEMModifiers('foo', ['bar'], '--custom--');
 
 ### `resolveBEMModifiers( modifiers )`
 
-Resolves a simple string or a potentially deeply nested structure of modifier
-values into a simple string array.
+Creates a flat string array from a potentially deeply nested structure of
+modifiers.
 
 ```ts
 resolveBEMModifiers([
@@ -86,6 +87,8 @@ resolveBEMModifiers([
 ```
 
 ### `deepJoinBEMModifiers( blockOrElement [, modifiers] [, options] )`
+
+Joins a BEM block or element with any number of modifiers.
 
 ```ts
 const modifiers = [

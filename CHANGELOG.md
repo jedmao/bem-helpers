@@ -1,3 +1,6 @@
+## v0.8.1
+- Update docs.
+
 ## v0.8.0
 - Add `separator` option to `deepJoinBEMModifiers`.
 - Add more jsdoc comments.
