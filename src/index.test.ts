@@ -75,6 +75,15 @@ test('deepJoinBEMModifiers returns joined BEM class names', t => {
 	)
 })
 
+test('deepJoinBEMModifiers supports custom separator option', t => {
+	t.deepEqual(
+		deepJoinBEMModifiers('foo', ['bar'], {
+			separator: '--custom--',
+		}),
+		['foo', 'foo--custom--bar'],
+	)
+})
+
 test('deepJoinBEMModifiers resolves nested modifiers structure', t => {
 	t.deepEqual(
 		deepJoinBEMModifiers(

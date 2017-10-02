@@ -11,8 +11,17 @@ export type BEMModifiers = Primitives
  * @param element The BEM element on the right side of the join.
  */
 export function joinBEMElement(
+	/**
+	 * BEM block.
+	 */
 	block: string,
+	/**
+	 * BEM element.
+	 */
 	element: string,
+	/**
+	 * Appears between the BEM block and element (e.g., block__element).
+	 */
 	separator: string = '__',
 ) {
 	if (!block) {
@@ -32,8 +41,18 @@ export function joinBEMElement(
  * "bar" modifier. The first value is always the block or element by itself.
  */
 export function joinBEMModifiers(
+	/**
+	 * BEM block or element.
+	 */
 	blockOrElement: string,
+	/**
+	 * BEM modifiers.
+	 */
 	modifiers: string[] = [],
+	/**
+	 * Appears between the BEM block or element and each modifier
+	 * (e.g., block--modifier, block__element--modifier).
+	 */
 	separator: string = '--',
 ) {
 	return !modifiers
@@ -50,13 +69,19 @@ export function joinBEMModifiers(
  * passed resolution.
  */
 export function resolveBEMModifiers(
+	/**
+	 * BEM modifiers (supports nested structures).
+	 */
 	modifiers?: BEMModifiers,
-	options: {
-		unique: boolean
-	} = {
-		unique: false,
-	}): string[] {
-	return truthyStringsKeys(modifiers, options)
+	{
+		unique = false,
+	}: {
+		/**
+		 * Removes duplicates.
+		 */
+		unique?: boolean
+	} = {}): string[] {
+	return truthyStringsKeys(modifiers, { unique })
 }
 
 /**
@@ -65,20 +90,33 @@ export function resolveBEMModifiers(
  * @param modifiers BEM modifiers (nested structure supported).
  */
 export function deepJoinBEMModifiers(
+	/**
+	 * BEM block or element.
+	 */
 	blockOrElement: string,
+	/**
+	 * BEM modifiers.
+	 */
 	modifiers?: BEMModifiers,
-	options: {
+	{
+		separator,
+		unique = false,
+	}: {
+		/**
+		 * Appears between the BEM block or element and each modifier
+		 * (e.g., block--modifier, block__element--modifier).
+		 */
+		separator?: string
 		/**
 		 * Removes duplicates.
 		 */
-		unique: boolean
-	} = {
-		unique: false,
-	},
+		unique?: boolean
+	} = {},
 ) {
 	return joinBEMModifiers(
 		blockOrElement,
-		resolveBEMModifiers(modifiers, options),
+		resolveBEMModifiers(modifiers, { unique }),
+		separator,
 	)
 }
 

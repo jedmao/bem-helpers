@@ -1,3 +1,7 @@
+## v0.8.0
+- Add `separator` option to `deepJoinBEMModifiers`.
+- Add more jsdoc comments.
+
 ## v0.7.0
 - **Breaking change:** Rename `toBEMClassNames` to `deepJoinBEMModifiers` and have it return an array instead of a string. Follow with `.join(' ')` to preserve previous functionality.
 

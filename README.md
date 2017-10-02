@@ -101,8 +101,11 @@ const modifiers = [
 deepJoinBEMModifiers('foo', modifiers);
 // ["foo, "foo--bar", "foo--bar", "foo--baz"]
 
-deepJoinBEMModifiers('foo', modifiers, { unique: true });
-// ["foo", "foo--bar", "foo--baz"]
+deepJoinBEMModifiers('foo', modifiers, {
+  separator: '--custom--',
+  unique: true
+});
+// ["foo", "foo--custom--bar", "foo--custom--baz"]
 ```
 
 See [the tests](https://github.com/jedmao/bem-helpers/blob/master/src/index.test.ts)
