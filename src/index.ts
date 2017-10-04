@@ -1,4 +1,7 @@
-import truthyStringsKeys, { Primitives } from 'truthy-strings-keys'
+import truthyStringsKeys, {
+	Primitives,
+	TruthyStringsKeysOptions,
+} from 'truthy-strings-keys'
 
 /**
  * BEM modifiers for blocks and elements (supports nested structures).
@@ -62,6 +65,9 @@ export function joinBEMModifiers(
 		))
 }
 
+export interface ResolveBEMModifiersOptions
+extends TruthyStringsKeysOptions {}
+
 /**
  * Creates a flat string array from a potentially deeply nested structure of
  * modifiers.
@@ -73,13 +79,17 @@ export function resolveBEMModifiers(
 	modifiers?: BEMModifiers,
 	{
 		unique = false,
-	}: {
-		/**
-		 * Removes duplicates.
-		 */
-		unique?: boolean
-	} = {}): string[] {
+	}: ResolveBEMModifiersOptions = {}): string[] {
 	return truthyStringsKeys(modifiers, { unique })
+}
+
+export interface DeepJoinBEMModifiersOptions
+extends ResolveBEMModifiersOptions {
+	/**
+	 * Appears between the BEM block or element and each modifier
+	 * (e.g., block--modifier, block__element--modifier).
+	 */
+	separator?: string
 }
 
 /**
@@ -99,17 +109,7 @@ export function deepJoinBEMModifiers(
 	{
 		separator,
 		unique = false,
-	}: {
-		/**
-		 * Appears between the BEM block or element and each modifier
-		 * (e.g., block--modifier, block__element--modifier).
-		 */
-		separator?: string
-		/**
-		 * Removes duplicates.
-		 */
-		unique?: boolean
-	} = {},
+	}: DeepJoinBEMModifiersOptions = {},
 ) {
 	return joinBEMModifiers(
 		blockOrElement,
@@ -119,12 +119,6 @@ export function deepJoinBEMModifiers(
 }
 
 export {
-	compact,
-	flatten,
-	identity,
-	isArray,
-	isString,
 	Primitive as BEMModifier,
 	PrimitiveHash as BEMModifiersHash,
-	uniq,
 } from 'truthy-strings-keys'

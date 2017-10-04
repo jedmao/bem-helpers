@@ -1,3 +1,8 @@
+## v0.9.0
+- Clean up dependencies.
+- Export options interfaces.
+- **Breaking change:** Stop exporting helper functions from `truthy-strings-keys` (`compact`, `flatten`, `identity`, `isArray`, `isString`, `uniq`). Sorry to be wishy washy about this one, but you should probably just import `truthy-strings-keys` directly if you want access to them.
+
 ## v0.8.1
 - Update docs.
 
