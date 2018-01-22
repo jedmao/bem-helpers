@@ -8,3 +8,4 @@ ts*.json
 dist/**/*.test.js
 dist/**/*.test.d.ts
 src/
+bem-helpers-*/

@@ -1,3 +1,7 @@
+## v0.9.1
+- Disable sourcemaps for distribution.
+- Fix tslint.
+
 ## v0.9.0
 - Clean up dependencies.
 - Export options interfaces.
