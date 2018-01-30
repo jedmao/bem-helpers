@@ -3,7 +3,6 @@ import test from 'ava'
 import {
 	joinBEMElement,
 	joinBEMModifiers,
-	deepJoinBEMModifiers,
 } from './'
 
 test('joinBEMElement throws if no block is provided', t => {
@@ -42,80 +41,21 @@ test('joinBEMElement joins a block to an element with a custom separator', t => 
 
 test('joinBEMModifiers joins with "--" by default', t => {
 	t.deepEqual(
-		joinBEMModifiers('foo', ['bar']),
+		joinBEMModifiers('foo', { bar: true }),
 		['foo', 'foo--bar'],
 	)
 })
 
 test('joinBEMModifiers joins with a custom separator', t => {
 	t.deepEqual(
-		joinBEMModifiers('foo', ['bar'], '--custom--'),
+		joinBEMModifiers('foo', { bar: true }, '--custom--'),
 		['foo', 'foo--custom--bar'],
 	)
 })
 
 test('joinBEMModifiers joins two modifiers to the same block or element', t => {
 	t.deepEqual(
-		joinBEMModifiers('foo', ['bar', 'baz']),
+		joinBEMModifiers('foo', { bar: true, baz: true }),
 		['foo', 'foo--bar', 'foo--baz'],
-	)
-})
-
-test('deepJoinBEMModifiers returns block (first arg) when only block is provided', t => {
-	t.deepEqual(
-		deepJoinBEMModifiers('foo'),
-		['foo'],
-	)
-})
-
-test('deepJoinBEMModifiers returns joined BEM class names', t => {
-	t.deepEqual(
-		deepJoinBEMModifiers('foo', ['bar']),
-		['foo', 'foo--bar'],
-	)
-})
-
-test('deepJoinBEMModifiers supports custom separator option', t => {
-	t.deepEqual(
-		deepJoinBEMModifiers('foo', ['bar'], {
-			separator: '--custom--',
-		}),
-		['foo', 'foo--custom--bar'],
-	)
-})
-
-test('deepJoinBEMModifiers resolves nested modifiers structure', t => {
-	t.deepEqual(
-		deepJoinBEMModifiers(
-			'foo',
-			[
-				'bar',
-				[
-					{
-						baz: true,
-					},
-				],
-			],
-		),
-		['foo', 'foo--bar', 'foo--baz'],
-	)
-})
-
-test('deepJoinBEMModifiers removes duplicates when { unique: true }', t => {
-	const modifiers = [
-		'bar',
-		[
-			{
-				bar: true,
-			},
-		],
-	]
-	t.deepEqual(
-		deepJoinBEMModifiers('foo', modifiers),
-		['foo', 'foo--bar', 'foo--bar'],
-	)
-	t.deepEqual(
-		deepJoinBEMModifiers('foo', modifiers, { unique: true }),
-		['foo', 'foo--bar'],
 	)
 })
