@@ -51,64 +51,11 @@ joinBEMElement('foo', 'bar', '__custom__');
 Joins a BEM block or element to any number of modifiers.
 
 ```ts
-joinBEMModifiers('foo__bar', ['baz', 'qux']);
+joinBEMModifiers('foo__bar', { baz: true, qux: true });
 // "foo__bar foo__bar--baz foo__bar--qux"
 
-joinBEMModifiers('foo', ['bar'], '--custom--');
+joinBEMModifiers('foo', { bar: true }, '--custom--');
 // foo foo--custom--bar
-```
-
-### `resolveBEMModifiers( modifiers )`
-
-Creates a flat string array from a potentially deeply nested structure of
-modifiers.
-
-```ts
-resolveBEMModifiers([
-  'foo', [
-    {
-      bar: true,
-      baz: null,
-    },
-  ],
-  'qux',
-  [
-    [
-      [
-        {
-          corge: undefined,
-          garpley: -1,
-        },
-      ],
-    ],
-  ],
-]);
-// ["foo", "bar", "qux", "garpley"]
-```
-
-### `deepJoinBEMModifiers( blockOrElement [, modifiers] [, options] )`
-
-Joins a BEM block or element with any number of modifiers.
-
-```ts
-const modifiers = [
-  'bar',
-  [
-    {
-      bar: true,
-      baz: true,
-    },
-  ],
-];
-
-deepJoinBEMModifiers('foo', modifiers);
-// ["foo, "foo--bar", "foo--bar", "foo--baz"]
-
-deepJoinBEMModifiers('foo', modifiers, {
-  separator: '--custom--',
-  unique: true
-});
-// ["foo", "foo--custom--bar", "foo--custom--baz"]
 ```
 
 See [the tests](https://github.com/jedmao/bem-helpers/blob/master/src/index.test.ts)

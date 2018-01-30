@@ -1,12 +1,9 @@
-import truthyStringsKeys, {
-	Primitives,
-	TruthyStringsKeysOptions,
-} from 'truthy-strings-keys'
-
 /**
- * BEM modifiers for blocks and elements (supports nested structures).
+ * BEM modifiers for blocks and elements.
  */
-export type BEMModifiers = Primitives
+export type BEMModifiers = {
+	[modifierName: string]: boolean
+}
 
 /**
  * Joins a BEM block with an element.
@@ -36,89 +33,51 @@ export function joinBEMElement(
 	return [block, element].join(separator)
 }
 
-/**
- * Joins a block or element with any number of modifiers.
- * @param blockOrElement The block or element on the left side of each join.
- * @param modifiers The modifiers on the right side of each join.
- * @return Returns at least 2 values (e.g., ['foo', 'foo--bar'] for a single
- * "bar" modifier. The first value is always the block or element by itself.
- */
-export function joinBEMModifiers(
-	/**
-	 * BEM block or element.
-	 */
-	blockOrElement: string,
-	/**
-	 * BEM modifiers.
-	 */
-	modifiers: string[] = [],
-	/**
-	 * Appears between the BEM block or element and each modifier
-	 * (e.g., block--modifier, block__element--modifier).
-	 */
-	separator: string = '--',
-) {
-	return !modifiers
-		? [blockOrElement]
-		: [blockOrElement].concat(modifiers.map(
-			m => [blockOrElement, m].join(separator),
-		))
+export interface JoinBlockToModifiers {
+	(
+		/**
+		 * The BEM block on the left side of each join.
+		 */
+		block: string,
+		/**
+		 * If specified, the last class names returned will be the BEM block name followed by any number of modifiers provided (e.g., foo--mod1 foo--mod2).
+		 */
+		modifiers: BEMModifiers,
+		/**
+		 * Appears between the BEM block or element and each modifier (i.e., the "--" in foo--mod).
+		 */
+		separator?: string,
+	): string[]
 }
 
-export interface ResolveBEMModifiersOptions
-extends TruthyStringsKeysOptions {}
-
-/**
- * Creates a flat string array from a potentially deeply nested structure of
- * modifiers.
- */
-export function resolveBEMModifiers(
-	/**
-	 * BEM modifiers (supports nested structures).
-	 */
-	modifiers?: BEMModifiers,
-	{
-		unique = false,
-	}: ResolveBEMModifiersOptions = {}): string[] {
-	return truthyStringsKeys(modifiers, { unique })
-}
-
-export interface DeepJoinBEMModifiersOptions
-extends ResolveBEMModifiersOptions {
-	/**
-	 * Appears between the BEM block or element and each modifier
-	 * (e.g., block--modifier, block__element--modifier).
-	 */
-	separator?: string
+export interface JoinElementToModifiers {
+	(
+		/**
+		 * The BEM element on the left side of each join.
+		 */
+		element: string,
+		/**
+		 * If specified, the last class names returned will be the BEM element name followed by any number of modifiers provided (e.g., foo__bar--mod1 foo__bar--mod2).
+		 */
+		modifiers: BEMModifiers,
+		/**
+		 * Appears between the BEM element and each modifier (i.e., the "--" in foo__bar--mod).
+		 */
+		separator?: string,
+	): string[]
 }
 
 /**
  * Joins a BEM block or element with any number of modifiers.
- * @param blockOrElement BEM block or element name.
- * @param modifiers BEM modifiers (nested structure supported).
  */
-export function deepJoinBEMModifiers(
-	/**
-	 * BEM block or element.
-	 */
+export const joinBEMModifiers: JoinBlockToModifiers & JoinElementToModifiers = (
 	blockOrElement: string,
-	/**
-	 * BEM modifiers.
-	 */
-	modifiers?: BEMModifiers,
-	{
-		separator,
-		unique = false,
-	}: DeepJoinBEMModifiersOptions = {},
-) {
-	return joinBEMModifiers(
-		blockOrElement,
-		resolveBEMModifiers(modifiers, { unique }),
-		separator,
-	)
-}
-
-export {
-	Primitive as BEMModifier,
-	PrimitiveHash as BEMModifiersHash,
-} from 'truthy-strings-keys'
+	modifiers: BEMModifiers = {},
+	separator: string = '--',
+) => (
+	[blockOrElement]
+		.concat(Object.keys(modifiers)
+			.filter(m => modifiers[m])
+			.map(m => [blockOrElement, m].join(separator)),
+		)
+)

@@ -1,3 +1,12 @@
+## v1.0.0
+- **Breaking:** Remove support for deeply nested modifiers (decided this limitation was actually a good thing).
+  - Removed `resolveBEMModifiers`
+  - Removed `deepJoinBEMModifiers`
+- **Breaking:** Changed modifiers argument to receive an object hash instead of a string array.
+  - before: `joinBEMModifiers('foo__bar', ['baz', 'qux']);`
+  - after: `joinBEMModifiers('foo__bar', { baz: true, qux: true });`
+- **Breaking:** No longer exporting `BEMModifier` and `BEMModifiersHash` interfaces. Instead, use the new `BEMModifiers` interface, which represents a shallow hash object.
+
 ## v0.9.1
 - Disable sourcemaps for distribution.
 - Fix tslint.
