@@ -1,6 +1,6 @@
 {
   "name": "bem-helpers",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "BEM helper functions for resolving and joining blocks to elements, blocks to modifiers and elements to modifiers.",
   "keywords": [
     "bem",

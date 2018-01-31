@@ -16,15 +16,9 @@ What is BEM? See [MindBEMding – getting your head ’round BEM syntax](https:/
 for a primer.
 
 These BEM helper functions help you to join block names to elements and any
-number of modifiers. Modifers can be a deeply nested structure of strings,
-arrays of strings or objects where the keys are the modifier names and the
-values determine whether the modifier name is activated or not.
-
-Why would you want to do this? You might want to build tools to translate
-custom HTML BEM properties into actual class names. These helpers make no
-assumptions about what frameworks you might be using and has only a couple of
-hard dependencies that are pretty light-weight. This
-means it shouldn't kill your footprint.
+number of modifiers. Modifers are defined as objects where the keys are the
+modifier names and the values determine whether the modifier name is activated
+or not.
 
 ## Installation
 
@@ -32,9 +26,59 @@ means it shouldn't kill your footprint.
 $ npm install bem-helpers
 ```
 
-## Usage
+## `BEMBlock( blockName [, options] )
 
-### `joinBEMElement( block, element [, separator] )`
+Returns a function that can be used to construct BEM class names. For example,
+in React, you might have a component that supports a dark theme as well as
+an expandable content area. This could be achieved like so:
+
+```jsx
+const b = BEMBlock('section')
+export const Section = ({ heading, isDark, isExpanded, children }) => (
+  <section className={b({ dark: isDark })}>
+    <h1 className={b('heading')}>
+      {heading}
+    </h1>
+    <div className={b('body', { expanded: isExpanded })}>
+      {children}
+    </div>
+  </section>
+)
+```
+
+If `isDark` and `isExpanded` props were both truthy, the result would be the
+following HTML:
+
+```html
+<section class="section section--dark">
+  <h1 class="section__heading">
+    Heading
+  </h1>
+  <div class="section__body section__body--expanded">
+    children
+  </div>
+</section>
+```
+
+Of course, if `isDark` and `isExpanded` were false, no `--dark` or `--expanded`
+modifiers would be constructed for them.
+
+### options
+
+If you want more control over the separators that are used to construct BEM
+selectors, the following options are available to you:
+
+#### `elementSeparator`
+
+A string that stands between the block and element names (i.e., the `__` in
+`foo__bar`). The default value is `__`.
+
+#### `modifierSeparator`
+
+A string that separates a block or element from a modifier (i.e., the `--` in
+`foo--bar` or `foo__bar--baz`). The default value is `--`.
+
+## `joinBEMElement( block, element [, separator] )`
 
 Joins a BEM block to an element.
 
@@ -46,7 +90,7 @@ joinBEMElement('foo', 'bar', '__custom__');
 // "foo__custom__bar"
 ```
 
-### `joinBEMModifiers( blockOrElement, modifiers [, separator] )`
+## `joinBEMModifiers( blockOrElement, modifiers [, separator] )`
 
 Joins a BEM block or element to any number of modifiers.
 
