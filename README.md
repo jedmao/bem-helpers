@@ -26,7 +26,7 @@ or not.
 $ npm install bem-helpers
 ```
 
-## `BEMBlock( blockName [, options] )
+## `BEMBlock( blockName [, options] )`
 
 Returns a function that can be used to construct BEM class names. For example,
 in React, you might have a component that supports a dark theme as well as
