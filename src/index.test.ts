@@ -1,6 +1,7 @@
 import test from 'ava'
 
 import {
+	BEMBlock,
 	joinBEMElement,
 	joinBEMModifiers,
 } from './'
@@ -57,5 +58,53 @@ test('joinBEMModifiers joins two modifiers to the same block or element', t => {
 	t.deepEqual(
 		joinBEMModifiers('foo', { bar: true, baz: true }),
 		['foo', 'foo--bar', 'foo--baz'],
+	)
+})
+
+const b = BEMBlock('foo')
+
+test('BEMBlock returns a function', t => {
+	t.is(
+		typeof b,
+		'function',
+	)
+})
+
+test('BEMBlock function returns a block selector', t => {
+	t.is(
+		b(),
+		'foo',
+	)
+})
+
+test('BEMBlock function constructs a block selector with modifiers', t => {
+	t.is(
+		b({ bar: true, baz: true, qux: false }),
+		'foo foo--bar foo--baz',
+	)
+})
+
+test('BEMBlock function constructs an element selector', t => {
+	t.is(
+		b('bar'),
+		'foo__bar',
+	)
+})
+
+test('BEMBlock function constructs an element selector with modifiers', t => {
+	t.is(
+		b('bar', { baz: true, qux: true, quux: false }),
+		'foo__bar foo__bar--baz foo__bar--qux',
+	)
+})
+
+test('BEMBlock function constructs an element selector with modifiers', t => {
+	const b2 = BEMBlock('foo', {
+		elementSeparator: 'xx',
+		modifierSeparator: 'yy',
+	})
+	t.is(
+		b2('bar', { baz: true, qux: true, quux: false }),
+		'fooxxbar fooxxbaryybaz fooxxbaryyqux',
 	)
 })

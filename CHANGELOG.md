@@ -1,3 +1,6 @@
+## v1.1.0
+- Introduce new `BEMBlock` factory function for constructing BEM class names.
+
 ## v1.0.0
 - **Breaking:** Remove support for deeply nested modifiers (decided this limitation was actually a good thing).
   - Removed `resolveBEMModifiers`
